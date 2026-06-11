@@ -30,9 +30,11 @@ function App() {
               <div><strong>Rot</strong><span>{selectedHole.rot} m</span></div>
             </div>
 
-            <div className="placeholderImage">
-              Birdiebook-Grafik Loch {selectedHole.id}
-            </div>
+   <img
+  src={`/birdiebook/loch${String(selectedHole.id).padStart(2, "0")}.jpg`}
+  alt={`Loch ${selectedHole.id}`}
+  className="holeImage"
+/>
 
             <button className="mainButton">📌 Pin-Positionen</button>
           </section>
