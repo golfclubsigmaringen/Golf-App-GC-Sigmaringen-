@@ -22,7 +22,7 @@ body {
 
 .hero {
   position: relative;
-  height: 360px;
+  height: 280px;
   overflow: hidden;
   background: var(--blue);
 }
@@ -36,27 +36,33 @@ body {
 .heroOverlay {
   position: absolute;
   inset: 0;
-  padding: 34px 26px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  padding: 34px 26px;
   color: white;
-  background: linear-gradient(
-    to top,
-    rgba(0, 74, 143, 0.9),
-    rgba(0, 74, 143, 0.18)
-  );
 }
-
+.heroOverlay::before {
+  content: "";
+  position: absolute;
+  left: -200px;
+  top: -100px;
+  width: 360px;
+  height: 900px;
+  background: #004a8f;
+  border-radius: 0 70% 70% 0;
+  z-index: -1;
+}
 .heroOverlay h1 {
+  font-size: 52px;
   margin: 0;
-  font-size: 48px;
-  line-height: 1;
+  font-weight: 800;
 }
 
 .heroOverlay h2 {
-  margin: 6px 0 8px;
-  font-size: 34px;
+  font-size: 26px;
+  margin: 0;
+  opacity: 0.95;
 }
 
 .heroOverlay p {
