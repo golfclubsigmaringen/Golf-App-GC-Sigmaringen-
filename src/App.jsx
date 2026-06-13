@@ -2,38 +2,24 @@ import { useState } from "react";
 import "./App.css";
 
 const holes = [
-  {
-    id: 1,
-    par: 4,
-    hcp: 17,
-    gelb: 337,
-    blau: 292,
-    rot: 247
-  },
-  {
-    id: 2,
-    par: 5,
-    hcp: 3,
-    gelb: 491,
-    blau: 482,
-    rot: 428
-  },
-  {
-    id: 3,
-    par: 4,
-    hcp: 13,
-    gelb: 281,
-    blau: 240,
-    rot: 230
-  },
-  {
-    id: 4,
-    par: "4/5",
-    hcp: 11,
-    gelb: 447,
-    blau: 447,
-    rot: 400
-  }
+  { id: 1, par: 4, hcp: 17, weiss: 337, gelb: 337, blau: 292, rot: 247 },
+  { id: 2, par: 5, hcp: 3, weiss: 491, gelb: 491, blau: 482, rot: 428 },
+  { id: 3, par: 4, hcp: 13, weiss: 291, gelb: 281, blau: 240, rot: 230 },
+  { id: 4, par: "5", hcp: 11, weiss: 443, gelb: 447, blau: 447, rot: 400 },
+  { id: 5, par: 4, hcp: 5, weiss: 349, gelb: 349, blau: 310, rot: 300 },
+  { id: 6, par: 3, hcp: 9, weiss: 185, gelb: 185, blau: 125, rot: 125 },
+  { id: 7, par: 4, hcp: 1, weiss: 376, gelb: 376, blau: 338, rot: 327 },
+  { id: 8, par: 3, hcp: 15, weiss: 150, gelb: 150, blau: 139, rot: 124 },
+  { id: 9, par: 4, hcp: 7, weiss: 380, gelb: 380, blau: 353, rot: 314 },
+  { id: 10, par: 4, hcp: 2, weiss: 423, gelb: 413, blau: 362, rot: 362 },
+  { id: 11, par: 4, hcp: 6, weiss: 365, gelb: 351, blau: 336, rot: 336 },
+  { id: 12, par: 4, hcp: 16, weiss: 310, gelb: 300, blau: 290, rot: 277 },
+  { id: 13, par: 3, hcp: 12, weiss: 157, gelb: 147, blau: 132, rot: 132 },
+  { id: 14, par: 5, hcp: 8, weiss: 490, gelb: 415, blau: 415, rot: 371 },
+  { id: 15, par: 3, hcp: 10, weiss: 188, gelb: 188, blau: 173, rot: 173 },
+  { id: 16, par: 4, hcp: 18, weiss: 290, gelb: 290, blau: 276, rot: 276 },
+  { id: 17, par: 5, hcp: 14, weiss: 474, gelb: 474, blau: 414, rot: 414 },
+  { id: 18, par: 4, hcp: 4, weiss: 401, gelb: 356, blau: 344, rot: 302 }
 ];
 function App() {
   const [page, setPage] = useState("home");
@@ -49,7 +35,7 @@ const [scores, setScores] = useState({});
 
           <section className="infoCard">
             <h1>Loch {selectedHole.id}</h1>
-            <p>Par {selectedHole.par} · HCP {selectedHole.hcp}</p>
+            <p>Par {selectedHole.parText || selectedHole.par} · HCP {selectedHole.hcp}</p>
 
             <div className="teeGrid">
               <div><strong>Gelb</strong><span>{selectedHole.gelb} m</span></div>
@@ -138,7 +124,7 @@ const [scores, setScores] = useState({});
 
       <div className="holeInfo">
         <strong>Loch {hole.id}</strong>
-        <span>Par {hole.par} · HCP {hole.hcp}</span>
+        <span>Par {hole.parText || hole.par} · HCP {hole.hcp}</span>
         <small>Gelb {hole.gelb} m</small>
       </div>
 
@@ -209,7 +195,7 @@ if (page === "scorecard") {
               <div className="scoreRow" key={hole.id}>
                 <div>
                   <strong>Loch {hole.id}</strong>
-                  <span>Par {hole.par} · HCP {hole.hcp}</span>
+                  <span>Par {hole.parText || hole.par} · HCP {hole.hcp}</span>
                 </div>
 
                 <button onClick={() => updateScore(hole.id, -1)}>-</button>
