@@ -25,10 +25,41 @@ function App() {
   const [page, setPage] = useState("home");
   const [selectedHole, setSelectedHole] = useState(null);
 const [scores, setScores] = useState({});
+const [showLogin, setShowLogin] = useState(false);
+const [adminPassword, setAdminPassword] = useState("");
+const [isAdmin, setIsAdmin] = useState(false);
+const [adminTimer, setAdminTimer] = useState(null);
+const [courseOpen, setCourseOpen] = useState(true);
+const [cartsAllowed, setCartsAllowed] = useState(true);
+const [pinPosition, setPinPosition] = useState(3);
+const startAdminPress = () => {
+  const timer = setTimeout(() => {
+    setShowLogin(true);
+  }, 5000);
+
+  setAdminTimer(timer);
+};
+
+const cancelAdminPress = () => {
+  if (adminTimer) {
+    clearTimeout(adminTimer);
+  }
+};
+
+const loginAdmin = () => {
+  if (adminPassword === "sigmaringen") {
+    setIsAdmin(true);
+    setShowLogin(false);
+    setPage("admin");
+  } else {
+    alert("Passwort falsch");
+  }
+};
   if (selectedHole) {
     return (
       <div className="app">
         <main className="content">
+      
           <button className="backButton" onClick={() => setSelectedHole(null)}>
             ← Zurück
           </button>
@@ -217,6 +248,57 @@ if (page === "scorecard") {
     </div>
   );
 }
+if (page === "admin" && isAdmin) {
+  return (
+    <div className="app">
+      <main className="content">
+        <button
+          className="backButton"
+          onClick={() => setPage("home")}
+        >
+          ← Home
+        </button>
+
+        <h1>Sekretariat</h1>
+<button
+  className="mainButton"
+  onClick={() => {
+    setIsAdmin(false);
+    setPage("home");
+  }}
+>
+  Abmelden
+</button>
+        <section className="infoCard">
+          <h3>Platzstatus</h3>
+          <button
+  className="mainButton"
+  onClick={() => setCourseOpen(!courseOpen)}
+>
+  {courseOpen ? "🟢 Platz geöffnet" : "🔴 Platz gesperrt"}
+</button>
+         <button
+  className="mainButton"
+  onClick={() => setCartsAllowed(!cartsAllowed)}
+>
+  {cartsAllowed ? "🚗 Carts erlaubt" : "🚫 Carts gesperrt"}
+</button>
+          <p>🛒 Trolleys erlaubt</p>
+        </section>
+
+        <section className="infoCard">
+          <h3>Pin Position</h3>
+          <p>Heute: Position 3</p>
+        </section>
+
+        <section className="infoCard">
+          <h3>Tagesplatzregel</h3>
+          <p>Besserlegen auf kurz gemähten Flächen.</p>
+        </section>
+      </main>
+    </div>
+  );
+}
   return (
     <div className="app">
       <header className="hero">
@@ -224,18 +306,53 @@ if (page === "scorecard") {
 
         <div className="heroOverlay">
           <h1>Golf App</h1>
-          <h2>GC Sigmaringen</h2>
+          <h2
+ onMouseDown={startAdminPress}
+  onMouseUp={cancelAdminPress}
+  onMouseLeave={cancelAdminPress}
+  onTouchStart={startAdminPress}
+  onTouchEnd={cancelAdminPress}
+>
+  GC Sigmaringen
+</h2>
           <p>Birdiebook · Scorekarte · Platzregeln</p>
         </div>
       </header>
 
       <main className="content">
+            {showLogin && (
+  <section className="infoCard">
+    <h3>Sekretariatszugang</h3>
+
+    <input
+      type="password"
+      placeholder="Passwort"
+      value={adminPassword}
+      onChange={(e) => setAdminPassword(e.target.value)}
+      style={{
+        width: "100%",
+        padding: "12px",
+        borderRadius: "10px",
+        border: "1px solid #ccc",
+        marginBottom: "12px"
+      }}
+    />
+
+    <button className="mainButton" onClick={loginAdmin}>
+      Anmelden
+    </button>
+  </section>
+)}
         <section className="statusCard">
           <span className="statusDot"></span>
           <div>
-<strong>Platz geöffnet</strong>
-<p>Pin Position heute: 3</p>
-<p>Sommergrüns · Trolleys erlaubt</p>
+<strong>
+  {courseOpen ? "Platz geöffnet" : "Platz gesperrt"}
+</strong>
+<p>Heute: Position {pinPosition}</p>
+<p>
+  Sommergrüns · {cartsAllowed ? "Carts erlaubt" : "Carts gesperrt"}
+</p>
                        
           </div>
         </section>
