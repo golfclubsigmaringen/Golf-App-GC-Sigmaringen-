@@ -553,3 +553,35 @@ body {
 .scoreDiff {
   pointer-events: none;
 }
+.pinButtons {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.pinButton {
+  border: none;
+  border-radius: 12px;
+  padding: 12px 0;
+  background: #e6e7e8;
+  color: #004a8f;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.pinButton.active {
+  background: #f5a81c;
+  color: white;
+}
+.holeImageWrapper {
+  position: relative;
+}
+
+.pinFlag {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  font-size: 28px;
+  z-index: 5;
+  pointer-events: none;
+}

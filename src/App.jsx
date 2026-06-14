@@ -21,6 +21,16 @@ const holes = [
   { id: 17, par: 5, hcp: 14, weiss: 474, gelb: 474, blau: 414, rot: 414 },
   { id: 18, par: 4, hcp: 4, weiss: 401, gelb: 356, blau: 344, rot: 302 }
 ];
+const pinCoordinates = {
+  1: {
+    1: { top: "14%", left: "47%" },
+    2: { top: "15%", left: "50%" },
+    3: { top: "17%", left: "51%" },
+    4: { top: "20%", left: "48%" },
+    5: { top: "18%", left: "45%" },
+    6: { top: "16%", left: "45%" }
+  }
+};
 function App() {
   const [page, setPage] = useState("home");
   const [selectedHole, setSelectedHole] = useState(null);
@@ -74,7 +84,7 @@ const loginAdmin = () => {
               <div><strong>Rot</strong><span>{selectedHole.rot} m</span></div>
             </div>
             <p style={{marginTop: "12px", fontWeight: "bold", color: "#f5a81c"}}>
-  Pin Position heute: 3
+  Pin Position heute: {pinPosition}  
 </p>
 <div className="gpsGrid">
   <div className="gpsCard">
@@ -92,11 +102,25 @@ const loginAdmin = () => {
     <span>260 m</span>
   </div>
 </div>
-   <img
-  src={`/birdiebook/loch${String(selectedHole.id).padStart(2, "0")}.jpg`}
-  alt={`Loch ${selectedHole.id}`}
-  className="holeImage"
-/>
+   <div className="holeImageWrapper">
+  <img
+    src={`/birdiebook/loch${String(selectedHole.id).padStart(2, "0")}.jpg`}
+    alt={`Loch ${selectedHole.id}`}
+    className="holeImage"
+  />
+
+  {pinCoordinates[selectedHole.id]?.[pinPosition] && (
+    <div
+      className="pinFlag"
+      style={{
+        top: pinCoordinates[selectedHole.id][pinPosition].top,
+        left: pinCoordinates[selectedHole.id][pinPosition].left
+      }}
+    >
+      🚩
+    </div>
+  )}
+</div>
 <div className="holeNav">
   <button
     className="navButton"
@@ -287,8 +311,20 @@ if (page === "admin" && isAdmin) {
         </section>
 
         <section className="infoCard">
-          <h3>Pin Position</h3>
-          <p>Heute: Position 3</p>
+       <h3>Pin Position</h3>
+<p>Heute: Position {pinPosition}</p>
+
+<div className="pinButtons">
+  {[1, 2, 3, 4, 5, 6].map((pos) => (
+    <button
+      key={pos}
+      className={pinPosition === pos ? "pinButton active" : "pinButton"}
+      onClick={() => setPinPosition(pos)}
+    >
+      {pos}
+    </button>
+  ))}
+</div>
         </section>
 
         <section className="infoCard">
