@@ -23,12 +23,12 @@ const holes = [
 ];
 const pinCoordinates = {
   1: {
-    1: { top: "14%", left: "47%" },
-    2: { top: "15%", left: "50%" },
-    3: { top: "17%", left: "51%" },
-    4: { top: "20%", left: "48%" },
-    5: { top: "18%", left: "45%" },
-    6: { top: "16%", left: "45%" }
+    1: { top: "09%", left: "50%" },
+    2: { top: "09%", left: "55%" },
+    3: { top: "12%", left: "55%" },
+    4: { top: "14%", left: "54%" },
+    5: { top: "14%", left: "50%" },
+    6: { top: "12%", left: "50%" }
   }
 };
 function App() {
@@ -41,11 +41,13 @@ const [isAdmin, setIsAdmin] = useState(false);
 const [adminTimer, setAdminTimer] = useState(null);
 const [courseOpen, setCourseOpen] = useState(true);
 const [cartsAllowed, setCartsAllowed] = useState(true);
-const [pinPosition, setPinPosition] = useState(3);
+const [pinPosition, setPinPosition] = useState(() => {
+  return Number(localStorage.getItem("pinPosition")) || 3;
+});
 const startAdminPress = () => {
   const timer = setTimeout(() => {
     setShowLogin(true);
-  }, 5000);
+  }, 3000);
 
   setAdminTimer(timer);
 };
@@ -319,7 +321,10 @@ if (page === "admin" && isAdmin) {
     <button
       key={pos}
       className={pinPosition === pos ? "pinButton active" : "pinButton"}
-      onClick={() => setPinPosition(pos)}
+      onClick={() => {
+  setPinPosition(pos);
+  localStorage.setItem("pinPosition", pos);
+}}
     >
       {pos}
     </button>
