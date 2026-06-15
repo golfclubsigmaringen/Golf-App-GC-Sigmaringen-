@@ -89,7 +89,7 @@ body {
 
 .statusCard {
   display: flex;
-  gap: 12px;
+  justify-content: space-between;
   align-items: center;
   margin-bottom: 18px;
 }
@@ -100,13 +100,7 @@ body {
   color: #666;
 }
 
-.statusDot {
-  width: 14px;
-  height: 14px;
-  background: #1fab5a;
-  border-radius: 50%;
-  flex: 0 0 auto;
-}
+
 
 .menuGrid {
   display: grid;
@@ -482,6 +476,20 @@ body {
   font-weight: bold;
   color: #f5a81c;
 }
+.teeYellow {
+  background: #f9d64a;
+  color: #222;
+}
+
+.teeBlue {
+  background: #2d6cdf;
+  color: white;
+}
+
+.teeRed {
+  background: #d93025;
+  color: white;
+}
 .scoreSummary {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -574,7 +582,7 @@ body {
   background: #f5a81c;
   color: white;
 }
-.holeImageWrapper {
+.holeImage {
   position: relative;
 }
 
@@ -584,4 +592,57 @@ body {
   font-size: 28px;
   z-index: 5;
   pointer-events: none;
+}
+.teeYellow {
+  background: #f9d64a !important;
+  color: #222;
+}
+
+.teeBlue {
+  background: #004a8f !important;
+  color: white;
+}
+
+.teeRed {
+  background: #c62828 !important;
+  color: white;
+}
+
+.teeYellow span,
+.teeBlue span,
+.teeRed span {
+  color: inherit;
+}
+.statusCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pinDisplay {
+  font-weight: 700;
+  color: #004a8f;
+}
+.statusLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.statusRight {
+  margin-left: auto;
+  font-weight: 700;
+  color: #1d3f8f;
+  white-space: nowrap;
+}
+.backButton {
+  background: none;
+  border: none;
+  color: #1d3f8f;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 15px;
+  margin-top: 40px;
+  
 }

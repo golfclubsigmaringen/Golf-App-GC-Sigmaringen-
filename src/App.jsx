@@ -21,16 +21,17 @@ const holes = [
   { id: 17, par: 5, hcp: 14, weiss: 474, gelb: 474, blau: 414, rot: 414 },
   { id: 18, par: 4, hcp: 4, weiss: 401, gelb: 356, blau: 344, rot: 302 }
 ];
-const pinCoordinates = {
+/*const pinCoordinates = {
   1: {
     1: { top: "09%", left: "50%" },
     2: { top: "09%", left: "55%" },
-    3: { top: "12%", left: "55%" },
+    3: { top: "28%", left: "55%" },
     4: { top: "14%", left: "54%" },
     5: { top: "14%", left: "50%" },
     6: { top: "12%", left: "50%" }
   }
-};
+};*/
+
 function App() {
   const [page, setPage] = useState("home");
   const [selectedHole, setSelectedHole] = useState(null);
@@ -39,9 +40,15 @@ const [showLogin, setShowLogin] = useState(false);
 const [adminPassword, setAdminPassword] = useState("");
 const [isAdmin, setIsAdmin] = useState(false);
 const [adminTimer, setAdminTimer] = useState(null);
-const [courseOpen, setCourseOpen] = useState(true);
-const [cartsAllowed, setCartsAllowed] = useState(true);
-const [pinPosition, setPinPosition] = useState(() => {
+const [courseOpen, setCourseOpen] = useState(() => {
+  const saved = localStorage.getItem("courseOpen");
+  return saved === null ? true : saved === "true";
+});
+const [cartsAllowed, setCartsAllowed] = useState(() => {
+  const saved = localStorage.getItem("cartsAllowed");
+  return saved === null ? true : saved === "true";
+});
+const [pinPosition, setPinPosition] = useState(() =>   {
   return Number(localStorage.getItem("pinPosition")) || 3;
 });
 const startAdminPress = () => {
@@ -81,29 +88,25 @@ const loginAdmin = () => {
             <p>Par {selectedHole.parText || selectedHole.par} · HCP {selectedHole.hcp}</p>
 
             <div className="teeGrid">
-              <div><strong>Gelb</strong><span>{selectedHole.gelb} m</span></div>
-              <div><strong>Blau</strong><span>{selectedHole.blau} m</span></div>
-              <div><strong>Rot</strong><span>{selectedHole.rot} m</span></div>
-            </div>
+  <div className="teeYellow">
+    <strong>Gelb</strong>
+    <span>{selectedHole.gelb} m</span>
+  </div>
+
+  <div className="teeBlue">
+    <strong>Blau</strong>
+    <span>{selectedHole.blau} m</span>
+  </div>
+
+  <div className="teeRed">
+    <strong>Rot</strong>
+    <span>{selectedHole.rot} m</span>
+  </div>
+</div>
             <p style={{marginTop: "12px", fontWeight: "bold", color: "#f5a81c"}}>
   Pin Position heute: {pinPosition}  
 </p>
-<div className="gpsGrid">
-  <div className="gpsCard">
-    <strong>Grün vorne</strong>
-    <span>170 m</span>
-  </div>
 
-  <div className="gpsCard">
-    <strong>Grün Mitte</strong>
-    <span>215 m</span>
-  </div>
-
-  <div className="gpsCard">
-    <strong>Grün hinten</strong>
-    <span>260 m</span>
-  </div>
-</div>
    <div className="holeImageWrapper">
   <img
     src={`/birdiebook/loch${String(selectedHole.id).padStart(2, "0")}.jpg`}
@@ -199,7 +202,166 @@ const loginAdmin = () => {
       </div>
     );
   }
-if (page === "scorecard") {
+  if (page === "platzregeln") {
+    
+  return (
+    <div className="app">
+      <main className="content">
+        <button
+          className="backButton"
+          onClick={() => setPage("home")}
+        >
+          ← Zurück
+        </button>
+
+        <section className="infoCard">
+          <h1>Platzregeln</h1>
+
+<h2>Platzregeln</h2>
+
+<h3>Bewegliche Hemmnisse (Regel 15.2)</h3>
+<p>
+Steine im Bunker. Blaue, rote, gelbe Pfosten sowie Entfernungspfosten.
+</p>
+
+<h3>AUS (Regel 18.2)</h3>
+<p>
+Wird durch weiße Pfähle, Elektrozäune und Straßen gekennzeichnet.
+Sofern weiße Linien vorhanden sind, haben diese Vorrang.
+</p>
+
+<p>
+Asphaltierte Straßen sind AUS. Ein jenseits der Straße liegender Ball ist im AUS
+(Bahnen 3, 13, 17 und 18).
+</p>
+
+<p>
+Liegt der Ball auf dem Platz innerhalb von zwei Schlägerlängen eines Elektrozauns,
+darf straflose Erleichterung nach Regel 16.1a in Anspruch genommen werden.
+</p>
+
+<h3>Ungewöhnliche Platzverhältnisse (Regel 16.1)</h3>
+
+<p>
+Jede Fläche, die durch weiße Einkreisungen und/oder blaue Pfähle gekennzeichnet ist.
+Ist beides vorhanden, gilt die Linie.
+</p>
+
+<p>
+<b>Unbewegliche Hemmnisse:</b> Junganpflanzungen, kenntlich gemacht durch Pfähle,
+Manschetten, Bänder oder Seile sowie befestigte Wege an Bahn 13 und 17.
+</p>
+
+<p>
+<b>Tierlöcher:</b> Ist die Lage des Balles betroffen, darf straflose Erleichterung
+nach Regel 16.1a in Anspruch genommen werden. Nicht, wenn nur der Stand betroffen ist.
+</p>
+
+<p>
+<b>Boden in Ausbesserung:</b> Blumenwiese bzw. deren gerodete Fläche (Ansaat) ist
+Boden in Ausbesserung, von dem nicht gespielt werden darf.
+Es muss straflose Erleichterung nach Regel 16.1a in Anspruch genommen werden.
+</p>
+
+<h3>Dropzone Bahn 13</h3>
+
+<p>
+Liegt der Ball in der roten Penalty Area, kann mit einem Strafschlag nach Regel 17.1
+verfahren werden oder wahlweise ein Ball in der Dropzone ins Spiel gebracht werden.
+</p>
+
+<h3>Penalty Area Bahn 8 und 18 (Teiche)</h3>
+
+<p>
+Grenze der roten Penalty Area an Bahn 8 und 18 ist die Innenseite der Steinumrandung
+(teichseitig).
+</p>
+
+<p>
+Die Steinumrandung bzw. der Betonrand gilt als unbewegliches Hemmnis, von dem
+straflose Erleichterung nach Regel 16.1a genommen werden kann.
+</p>
+
+<h3>Spielverbotszonen (SVZ) (Regel 2.4)</h3>
+
+<p>
+An Bahn 11 ist die SVZ durch gelbe Pfosten mit grünen Köpfen gekennzeichnet.
+Das Betreten und Spielen daraus ist verboten.
+</p>
+
+<h3>Betretungsverbote</h3>
+
+<p>
+Alle Teiche und deren Umrandung (Kies oder Folie) sowie das Feld rechts der Bahn 17.
+Zuwiderhandlungen ziehen eine Platzsperre nach sich.
+</p>
+
+<h3>Bäume mit Verbissschutz aus Drahtgewebe (Biberschutz)</h3>
+
+<p>
+Von Bäumen, die so geschützt sind, darf keine straflose Erleichterung genommen werden.
+</p>
+
+<h3>Richtlinien für das Verhalten von Spielern (Regel 1.2)</h3>
+
+<ul>
+  <li>Erster Verstoß – Verwarnung</li>
+  <li>Zweiter Verstoß – Ein Strafschlag</li>
+  <li>Dritter Verstoß – Grundstrafe (zwei Strafschläge)</li>
+  <li>Vierter Verstoß – Disqualifikation</li>
+</ul>
+        </section>
+      </main>
+    </div>
+  );
+}
+if (page === "kontakt") {
+  return (
+    <div className="app">
+      <main className="content">
+        <button
+          className="backButton"
+          onClick={() => setPage("home")}
+        >
+          ← Zurück
+        </button>
+      
+
+        <section className="infoCard">
+  <h1>Clubkontakt</h1>
+
+  <p>
+    <strong>Golf-Club Sigmaringen Zollern-Alb e.V.</strong>
+  </p>
+
+  <p>
+    Buwiesen 10<br />
+    D-72514 Inzigkofen
+  </p>
+
+  <p>
+    📞 +49 7571 74 42 0
+  </p>
+
+  <p>
+    ✉️ info@gc-sigmaringen.de
+  </p>
+
+
+          <p>
+            Öffnungszeiten Sekretariat:
+            <br />
+            Mo–Sa: 09:00–17:00 Uhr
+            <br />
+            So & Feiertage: 09:00–16:00 Uhr
+          </p>
+        </section>
+      </main>
+    </div>
+  );
+}
+if (page === "scorecard")   {
+  
   const updateScore = (holeId, change) => {
     setScores((prev) => ({
       ...prev,
@@ -299,18 +461,25 @@ if (page === "admin" && isAdmin) {
           <h3>Platzstatus</h3>
           <button
   className="mainButton"
-  onClick={() => setCourseOpen(!courseOpen)}
+  onClick={() => {
+  const newValue = !courseOpen;
+  setCourseOpen(newValue);
+  localStorage.setItem("courseOpen", newValue);
+}}
 >
   {courseOpen ? "🟢 Platz geöffnet" : "🔴 Platz gesperrt"}
 </button>
          <button
   className="mainButton"
-  onClick={() => setCartsAllowed(!cartsAllowed)}
+onClick={() => {
+  const newValue = !cartsAllowed;
+  setCartsAllowed(newValue);
+  localStorage.setItem("cartsAllowed", newValue);
+}}
 >
   {cartsAllowed ? "🚗 Carts erlaubt" : "🚫 Carts gesperrt"}
 </button>
-          <p>🛒 Trolleys erlaubt</p>
-        </section>
+           </section>
 
         <section className="infoCard">
        <h3>Pin Position</h3>
@@ -356,7 +525,7 @@ if (page === "admin" && isAdmin) {
 >
   GC Sigmaringen
 </h2>
-          <p>Birdiebook · Scorekarte · Platzregeln</p>
+         
         </div>
       </header>
 
@@ -384,19 +553,25 @@ if (page === "admin" && isAdmin) {
     </button>
   </section>
 )}
-        <section className="statusCard">
-          <span className="statusDot"></span>
-          <div>
-<strong>
-  {courseOpen ? "Platz geöffnet" : "Platz gesperrt"}
-</strong>
-<p>Heute: Position {pinPosition}</p>
-<p>
-  Sommergrüns · {cartsAllowed ? "Carts erlaubt" : "Carts gesperrt"}
-</p>
-                       
-          </div>
-        </section>
+<section className="statusCard">
+
+  <div className="statusLeft">
+
+    <p>
+      {courseOpen ? "🟢 Platz geöffnet" : "🔴 Platz gesperrt"}
+    </p>
+
+    <p>
+      {cartsAllowed ? "🟢 Carts erlaubt" : "🔴 Carts gesperrt"}
+    </p>
+
+  </div>
+
+  <div className="statusRight">
+    ⚑ Pin Position {pinPosition}
+  </div>
+
+</section>
 
 <section className="homeMenu">
   <button className="homeMenuButton" onClick={() => setPage("birdiebook")}>
@@ -422,16 +597,22 @@ if (page === "admin" && isAdmin) {
   <span className="menuArrow">›</span>
 </button>
 
-  <button className="homeMenuButton">
+<button
+  className="homeMenuButton"
+  onClick={() => setPage("platzregeln")}
+>
     <span className="menuIcon">i</span>
     <div>
+      
       <strong>Platzregeln</strong>
       <p>Regeln & Hinweise</p>
     </div>
     <span className="menuArrow">›</span>
   </button>
-
-  <button className="homeMenuButton">
+<button
+  className="homeMenuButton"
+  onClick={() => setPage("kontakt")}
+>
     <span className="menuIcon">☎</span>
     <div>
       <strong>Clubkontakt</strong>
