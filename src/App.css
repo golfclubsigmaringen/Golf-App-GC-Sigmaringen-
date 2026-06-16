@@ -646,3 +646,12 @@ body {
   margin-top: 40px;
   
 }
+.clubLogo {
+  width: 280px;
+  max-width: 90%;
+  display: block;
+  margin: 0 auto 20px auto;
+}
+.infoCard strong {
+  color: #0b4a93;
+}

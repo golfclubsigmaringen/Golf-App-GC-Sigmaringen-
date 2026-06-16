@@ -286,7 +286,7 @@ straflose Erleichterung nach Regel 16.1a genommen werden kann.
 
 <p>
 An Bahn 11 ist die SVZ durch gelbe Pfosten mit grünen Köpfen gekennzeichnet.
-Das Betreten und Spielen daraus ist verboten.
+Das Betreten und Spielen daraurds ist verboten.
 </p>
 
 <h3>Betretungsverbote</h3>
@@ -325,7 +325,11 @@ if (page === "kontakt") {
         >
           ← Zurück
         </button>
-      
+      <img
+  src="/logo-gc-sig-positiv400px.png"
+  alt="Golf-Club Sigmaringen"
+  className="clubLogo"
+/>
 
         <section className="infoCard">
   <h1>Clubkontakt</h1>
@@ -334,27 +338,27 @@ if (page === "kontakt") {
     <strong>Golf-Club Sigmaringen Zollern-Alb e.V.</strong>
   </p>
 
-  <p>
-    Buwiesen 10<br />
-    D-72514 Inzigkofen
-  </p>
+ <p>
+ 
+⚑ Buwiesen 10<br />D-72514 Inzigkofen</p>
 
-  <p>
-    📞 +49 7571 74 42 0
-  </p>
+<p>
+  <a href="tel:+49757174420">
+    ☎ +49 7571 74 42 0
+  </a>
+</p>
 
-  <p>
-    ✉️ info@gc-sigmaringen.de
-  </p>
+<p>
+  <a href="mailto:info@gc-sigmaringen.de">
+    ✉ info@gc-sigmaringen.de
+  </a>
+</p>
 
-
-          <p>
-            Öffnungszeiten Sekretariat:
-            <br />
-            Mo–Sa: 09:00–17:00 Uhr
-            <br />
-            So & Feiertage: 09:00–16:00 Uhr
-          </p>
+<section className="infoCard">
+  <h3>Öffnungszeiten Sekretariat</h3>
+  <p>Mo–Sa: 09:00–17:00 Uhr</p>
+  <p>So & Feiertage: 09:00–16:00 Uhr</p>
+</section>
         </section>
       </main>
     </div>
@@ -568,7 +572,7 @@ onClick={() => {
   </div>
 
   <div className="statusRight">
-    ⚑ Pin Position {pinPosition}
+    ⚑ Pin  Position {pinPosition}
   </div>
 
 </section>
@@ -622,11 +626,7 @@ onClick={() => {
   </button>
 </section>
 
-        <section className="infoCard">
-          <h3>Öffnungszeiten Sekretariat</h3>
-          <p>Mo–Sa: 09:00–17:00 Uhr</p>
-          <p>So & Feiertage: 09:00–16:00 Uhr</p>
-        </section>
+      
       </main>
     </div>
   );
