@@ -113,18 +113,6 @@ const loginAdmin = () => {
     alt={`Loch ${selectedHole.id}`}
     className="holeImage"
   />
-
-  {pinCoordinates[selectedHole.id]?.[pinPosition] && (
-    <div
-      className="pinFlag"
-      style={{
-        top: pinCoordinates[selectedHole.id][pinPosition].top,
-        left: pinCoordinates[selectedHole.id][pinPosition].left
-      }}
-    >
-      🚩
-    </div>
-  )}
 </div>
 <div className="holeNav">
   <button
