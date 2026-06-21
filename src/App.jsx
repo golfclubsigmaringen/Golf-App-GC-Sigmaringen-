@@ -420,52 +420,55 @@ const getPlayingHandicap = () => {
 <p>Runde erfassen</p>
 
 <section className="scoreSettings">
-  <div>
+  <h3>Rundeneinstellungen</h3>
+
+  <div className="scoreSettingRow">
     <label>Geschlecht</label>
     <select
-  value={gender}
-  onChange={(e) => setGender(e.target.value)}
->
-  <option>Mann</option>
-  <option>Frau</option>
-</select>
+      value={gender}
+      onChange={(e) => setGender(e.target.value)}
+    >
+      <option>Mann</option>
+      <option>Frau</option>
+    </select>
   </div>
 
-  <div>
+  <div className="scoreSettingRow">
     <label>Abschlag</label>
-  <select
-  value={tee}
-  onChange={(e) => setTee(e.target.value)}
->
- {gender === "Mann" && (
-  <>
-    <option>Gelb</option>
-    <option>Blau</option>
-  </>
-)}
+    <select
+      value={tee}
+      onChange={(e) => setTee(e.target.value)}
+    >
+      {gender === "Mann" && (
+        <>
+          <option>Gelb</option>
+          <option>Blau</option>
+        </>
+      )}
 
-{gender === "Frau" && (
-  <>
-    <option>Rot</option>
-    <option>Blau</option>
-  </>
-)}
-</select>
+      {gender === "Frau" && (
+        <>
+          <option>Rot</option>
+          <option>Blau</option>
+        </>
+      )}
+    </select>
   </div>
 
-  <div>
-   <label>Handicap</label>
-<input
-  type="number"
-  value={handicap}
-  onChange={(e) => setHandicap(e.target.value)}
-/>
-<p>
-  Handicap Index: {handicap}
-</p>
-<p>
-  Spielvorgabe: <strong>{getPlayingHandicap()}</strong>
-</p>
+  <div className="scoreSettingRow">
+    <label>Handicap</label>
+    <input
+      type="number"
+      value={handicap}
+      onChange={(e) => setHandicap(e.target.value)}
+      min="0"
+      max="54"
+      step="0.1"
+    />
+  </div>
+
+  <div className="playingHandicapBox">
+    Spielvorgabe: <strong>{getPlayingHandicap()}</strong>
   </div>
 </section>
 

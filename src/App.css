@@ -666,3 +666,48 @@ body {
 .infoCard strong {
   color: #0b4a93;
 }
+.scoreSettings {
+  background: white;
+  border-radius: 22px;
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+}
+
+.scoreSettings h3 {
+  margin-bottom: 16px;
+  color: #004a8f;
+}
+
+.scoreSettingRow {
+  display: grid;
+  grid-template-columns: 140px 180px;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 12px;
+}
+
+.scoreSettingRow label {
+  font-weight: 700;
+}
+
+.scoreSettingRow select,
+.scoreSettingRow input {
+  width: 140px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+}
+
+.playingHandicapBox {
+  margin-top: 16px;
+  padding: 14px;
+  border-radius: 16px;
+  background: #e6f0fb;
+  color: #004a8f;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+}
