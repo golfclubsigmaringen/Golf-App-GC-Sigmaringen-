@@ -370,11 +370,14 @@ if (page === "scorecard")   {
     }));
   };
 
-  const totalPar = holes.reduce((sum, hole) => sum + Number(hole.par.toString().split("/")[0]), 0);
-  const totalScore = holes.reduce(
-    (sum, hole) => sum + (scores[hole.id] || Number(hole.par.toString().split("/")[0])),
-    0
-  );
+const totalPar = holes.reduce((sum, hole) => sum + Number(hole.par), 0);
+
+const totalScore = holes.reduce(
+  (sum, hole) => sum + (scores[hole.id] || Number(hole.par)),
+  0
+);
+
+
 const getPlayingHandicap = () => {
   let slope = 113;
   let cr = 72;
@@ -403,17 +406,7 @@ const getPlayingHandicap = () => {
     cr = 72.4;
     par = 72;
   }
-const getShotsForHole = (hcp) => {
-  const playingHandicap = getPlayingHandicap();
-
-  const baseShots = Math.floor(playingHandicap / 18);
-  const extraShots = playingHandicap % 18;
-
-  return hcp <= extraShots
-    ? baseShots + 1
-    : baseShots;
-};
-  return Math.round(
+    return Math.round(
     Number(handicap) * slope / 113 + (cr - par)
   );
 };
@@ -427,6 +420,21 @@ const getShotsForHole = (hcp) => {
     ? baseShots + 1
     : baseShots;
 };
+
+const getStablefordPoints = (hole) => {
+  const parValue = Number(hole.par.toString().split("/")[0]);
+  const score = scores[hole.id] || parValue;
+  const strokes = getShotsForHole(hole.hcp);
+
+  const netScore = score - strokes;
+  const points = 2 + (parValue - netScore);
+
+  return Math.max(0, points);
+};
+const totalStableford = holes.reduce(
+  (sum, hole) => sum + getStablefordPoints(hole),
+  0
+);
   return (
     <div className="app">
       <main className="content">
@@ -491,19 +499,21 @@ const getShotsForHole = (hcp) => {
 </section>
 
 <section className="scoreSummary">
-          <div>
-            <strong>Par</strong>
-            <span>{totalPar}</span>
-          </div>
-          <div>
-            <strong>Score</strong>
-            <span>{totalScore}</span>
-          </div>
-          <div>
-            <strong>+ / -</strong>
-            <span>{totalScore - totalPar}</span>
-          </div>
-        </section>
+  <div>
+    <strong>Par</strong>
+    <span>{totalPar}</span>
+  </div>
+
+  <div>
+    <strong>Score</strong>
+    <span>{totalScore}</span>
+  </div>
+
+  <div>
+    <strong>Punkte</strong>
+    <span>{totalStableford}</span>
+  </div>
+</section>
 
         <section className="scoreList">
           {holes.map((hole) => {
