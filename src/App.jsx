@@ -403,12 +403,30 @@ const getPlayingHandicap = () => {
     cr = 72.4;
     par = 72;
   }
+const getShotsForHole = (hcp) => {
+  const playingHandicap = getPlayingHandicap();
 
+  const baseShots = Math.floor(playingHandicap / 18);
+  const extraShots = playingHandicap % 18;
+
+  return hcp <= extraShots
+    ? baseShots + 1
+    : baseShots;
+};
   return Math.round(
     Number(handicap) * slope / 113 + (cr - par)
   );
 };
+const getShotsForHole = (hcp) => {
+  const playingHandicap = getPlayingHandicap();
 
+  const baseShots = Math.floor(playingHandicap / 18);
+  const extraShots = playingHandicap % 18;
+
+  return hcp <= extraShots
+    ? baseShots + 1
+    : baseShots;
+};
   return (
     <div className="app">
       <main className="content">
@@ -496,7 +514,15 @@ const getPlayingHandicap = () => {
               <div className="scoreRow" key={hole.id}>
                 <div>
                   <strong>Loch {hole.id}</strong>
-                  <span>Par {hole.parText || hole.par} · HCP {hole.hcp}</span>
+                  <div>
+  <span>
+    Par {hole.parText || hole.par} · HCP {hole.hcp}
+  </span>
+
+  <small className="strokeInfo">
+    Vorgabenschläge: {getShotsForHole(hole.hcp)}
+  </small>
+</div>
                 </div>
 
                 <button onClick={() => updateScore(hole.id, -1)}>-</button>
