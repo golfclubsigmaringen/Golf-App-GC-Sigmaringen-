@@ -113,7 +113,7 @@ const loginAdmin = () => {
 
    <div className="holeImageWrapper">
   <img
-    src={`/birdiebook/loch${String(selectedHole.id).padStart(2, "0")}.jpg`}
+    src={`${import.meta.env.BASE_URL}birdiebook/loch${String(selectedHole.id).padStart(2, "0")}.jpg`}
     alt={`Loch ${selectedHole.id}`}
     className="holeImage"
   />
