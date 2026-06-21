@@ -431,8 +431,20 @@ const getStablefordPoints = (hole) => {
 
   return Math.max(0, points);
 };
+
 const totalStableford = holes.reduce(
+  
   (sum, hole) => sum + getStablefordPoints(hole),
+  0
+);
+const totalNetto = holes.reduce(
+  (sum, hole) => {
+    const parValue = Number(hole.par.toString().split("/")[0]);
+    const score = scores[hole.id] || parValue;
+    const strokes = getShotsForHole(hole.hcp);
+
+    return sum + (score - strokes);
+  },
   0
 );
   return (
@@ -513,6 +525,10 @@ const totalStableford = holes.reduce(
     <strong>Punkte</strong>
     <span>{totalStableford}</span>
   </div>
+  <div>
+  <strong>Netto</strong>
+  <span>{totalNetto}</span>
+</div>
 </section>
 
         <section className="scoreList">
@@ -540,11 +556,15 @@ const totalStableford = holes.reduce(
                 <button onClick={() => updateScore(hole.id, 1)}>+</button>
 
                 <span className="scoreDiff">
-  {score - parValue === 0
-    ? "E"
-    : score - parValue > 0
-    ? `+${score - parValue}`
-    : score - parValue}
+{score - parValue === 0
+  ? (
+    <>
+      <span>{getStablefordPoints(hole)} P</span>
+         </>
+  )
+  : score - parValue > 0
+  ? `+${score - parValue}`
+  : score - parValue}
 </span>
               </div>
             );
