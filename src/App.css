@@ -478,7 +478,7 @@ body {
 }
 .teeYellow {
   background: #f9d64a;
-  color: #222;
+  color: white;
 }
 
 .teeBlue {
@@ -595,7 +595,7 @@ body {
 }
 .teeYellow {
   background: #f9d64a !important;
-  color: #222;
+  color: #111;
 }
 
 .teeBlue {
@@ -612,6 +612,17 @@ body {
 .teeBlue span,
 .teeRed span {
   color: inherit;
+}
+.teeBlue strong,
+.teeBlue span,
+.teeRed strong,
+.teeRed span {
+  color: white !important;
+}
+
+.teeYellow strong,
+.teeYellow span {
+  color: #111 !important;
 }
 .statusCard {
   display: flex;

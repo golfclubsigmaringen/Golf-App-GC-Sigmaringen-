@@ -50,7 +50,11 @@ const [cartsAllowed, setCartsAllowed] = useState(() => {
 });
 const [pinPosition, setPinPosition] = useState(() =>   {
   return Number(localStorage.getItem("pinPosition")) || 3;
+
 });
+  const [gender, setGender] = useState("Mann");
+const [tee, setTee] = useState("Gelb");
+const [handicap, setHandicap] = useState(54);
 const startAdminPress = () => {
   const timer = setTimeout(() => {
     setShowLogin(true);
@@ -371,6 +375,39 @@ if (page === "scorecard")   {
     (sum, hole) => sum + (scores[hole.id] || Number(hole.par.toString().split("/")[0])),
     0
   );
+const getPlayingHandicap = () => {
+  let slope = 113;
+  let cr = 72;
+  let par = 72;
+
+  if (gender === "Mann" && tee === "Gelb") {
+    slope = 132;
+    cr = 71.5;
+    par = 72;
+  }
+
+  if (gender === "Mann" && tee === "Blau") {
+    slope = 128;
+    cr = 68.8;
+    par = 72;
+  }
+
+  if (gender === "Frau" && tee === "Blau") {
+    slope = 136;
+    cr = 74.7;
+    par = 72;
+  }
+
+  if (gender === "Frau" && tee === "Rot") {
+    slope = 133;
+    cr = 72.4;
+    par = 72;
+  }
+
+  return Math.round(
+    Number(handicap) * slope / 113 + (cr - par)
+  );
+};
 
   return (
     <div className="app">
@@ -380,9 +417,59 @@ if (page === "scorecard")   {
         </button>
 
         <h1>Scorekarte</h1>
-        <p>Runde erfassen</p>
+<p>Runde erfassen</p>
 
-        <section className="scoreSummary">
+<section className="scoreSettings">
+  <div>
+    <label>Geschlecht</label>
+    <select
+  value={gender}
+  onChange={(e) => setGender(e.target.value)}
+>
+  <option>Mann</option>
+  <option>Frau</option>
+</select>
+  </div>
+
+  <div>
+    <label>Abschlag</label>
+  <select
+  value={tee}
+  onChange={(e) => setTee(e.target.value)}
+>
+ {gender === "Mann" && (
+  <>
+    <option>Gelb</option>
+    <option>Blau</option>
+  </>
+)}
+
+{gender === "Frau" && (
+  <>
+    <option>Rot</option>
+    <option>Blau</option>
+  </>
+)}
+</select>
+  </div>
+
+  <div>
+   <label>Handicap</label>
+<input
+  type="number"
+  value={handicap}
+  onChange={(e) => setHandicap(e.target.value)}
+/>
+<p>
+  Handicap Index: {handicap}
+</p>
+<p>
+  Spielvorgabe: <strong>{getPlayingHandicap()}</strong>
+</p>
+  </div>
+</section>
+
+<section className="scoreSummary">
           <div>
             <strong>Par</strong>
             <span>{totalPar}</span>
