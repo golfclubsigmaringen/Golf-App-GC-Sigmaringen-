@@ -658,23 +658,7 @@ onClick={() => {
 }
   return (
     <div className="app">
-      <header className="hero">
-      <img src={`${import.meta.env.BASE_URL}golfclub.jpg`} alt="Golf-Club Sigmaringen" />
-
-        <div className="heroOverlay">
-          <h1>Golf App</h1>
-          <h2
- onMouseDown={startAdminPress}
-  onMouseUp={cancelAdminPress}
-  onMouseLeave={cancelAdminPress}
-  onTouchStart={startAdminPress}
-  onTouchEnd={cancelAdminPress}
->
-  GC Sigmaringen
-</h2>
-         
-        </div>
-      </header>
+  
 
       <main className="content">
             {showLogin && (
@@ -703,15 +687,12 @@ onClick={() => {
 <section className="statusCard">
 
   <div className="statusLeft">
-
     <p>
       {courseOpen ? "🟢 Platz geöffnet" : "🔴 Platz gesperrt"}
     </p>
-
     <p>
       {cartsAllowed ? "🟢 Carts erlaubt" : "🔴 Carts gesperrt"}
     </p>
-
   </div>
 
   <div className="statusRight">
@@ -727,7 +708,7 @@ onClick={() => {
       <strong>Birdiebook</strong>
       <p>18-Loch Birdiebook</p>
     </div>
-    <span className="menuIcon"></span>
+    <span className="menuIcon">›</span>
   </button>
 
   <button
@@ -768,9 +749,29 @@ onClick={() => {
     <span className="menuIcon">›</span>
   </button>
 </section>
-
-      
+   
       </main>
+<nav className="bottomNav">
+  <button onClick={() => setPage("home")}>
+    <span>⌂</span>
+    <small>Home</small>
+  </button>
+
+  <button onClick={() => setPage("birdiebook")}>
+    <span>⚑</span>
+    <small>Birdiebook</small>
+  </button>
+
+  <button onClick={() => setPage("scorecard")}>
+    <span>≡</span>
+    <small>Scorekarte</small>
+  </button>
+
+  <button onClick={() => setPage("platzregeln")}>
+    <span>•••</span>
+    <small>Mehr</small>
+  </button>
+</nav>
     </div>
   );
 }
