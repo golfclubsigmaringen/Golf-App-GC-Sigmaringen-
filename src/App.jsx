@@ -35,6 +35,7 @@ const holes = [
 function App() {
   const [page, setPage] = useState("home");
   const [selectedHole, setSelectedHole] = useState(holes[0]);
+  const currentHole = selectedHole || holes[0];
 const [scores, setScores] = useState({});
 const [showLogin, setShowLogin] = useState(false);
 const [adminPassword, setAdminPassword] = useState("");
@@ -181,7 +182,7 @@ const loginAdmin = () => {
       </div>
 
       <img
-        src={`${import.meta.env.BASE_URL}birdiebook/loch${String(selectedHole.id).padStart(2, "0")}.jpg`}
+        src={`${import.meta.env.BASE_URL}birdiebook/loch${String(hole.id).padStart(2, "0")}.jpg`}
         alt={`Loch ${hole.id}`}
         className="holeThumb"
       />
