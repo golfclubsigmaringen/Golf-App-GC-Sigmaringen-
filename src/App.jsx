@@ -113,7 +113,7 @@ const loginAdmin = () => {
 
    <div className="holeImageWrapper">
   <img
-    src={`${import.meta.env.BASE_URL}birdiebook/loch${String(selectedHole.id).padStart(2, "0")}.jpg`}
+    src={`${import.meta.env.BASE_URL}birdiebook/loch${String(hole.id).padStart(2, "0")}.jpg`}
     alt={`Loch ${selectedHole.id}`}
     className="holeImage"
   />
@@ -181,7 +181,7 @@ const loginAdmin = () => {
       </div>
 
       <img
-        src={`/birdiebook/loch${String(hole.id).padStart(2, "0")}.jpg`}
+        src={`${import.meta.env.BASE_URL}birdiebook/loch${String(hole.id).padStart(2, "0")}.jpg`}
         alt={`Loch ${hole.id}`}
         className="holeThumb"
       />
@@ -650,7 +650,7 @@ onClick={() => {
   return (
     <div className="app">
       <header className="hero">
-        <img src="/golfclub.jpg" alt="Golf-Club Sigmaringen" />
+      <img src={`${import.meta.env.BASE_URL}golfclub.jpg`} alt="Golf-Club Sigmaringen" />
 
         <div className="heroOverlay">
           <h1>Golf App</h1>
