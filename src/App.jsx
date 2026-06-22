@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import "./App.css";
 
 const holes = [
@@ -34,8 +34,12 @@ const holes = [
 
 function App() {
   const [page, setPage] = useState("home");
-  const [selectedHole, setSelectedHole] = useState(holes[0]);
+  const [selectedHole, setSelectedHole] = useState(null);
   const currentHole = selectedHole || holes[0];
+  useEffect(() => {
+  setPage("home");
+  setSelectedHole(holes[0]);
+}, []);
 const [scores, setScores] = useState({});
 const [showLogin, setShowLogin] = useState(false);
 const [adminPassword, setAdminPassword] = useState("");
@@ -79,7 +83,7 @@ const loginAdmin = () => {
     alert("Passwort falsch");
   }
 };
-  if (selectedHole) {
+  if (page === "hole" && selectedHole) {
     return (
       <div className="app">
         <main className="content">
@@ -151,6 +155,7 @@ const loginAdmin = () => {
             <button className="mainButton">📌 Pin-Positionen</button>
           </section>
         </main>
+        
       </div>
     );
   }
@@ -168,11 +173,14 @@ const loginAdmin = () => {
 
 <section className="holeList">
   {holes.map((hole) => (
-    <button
-      key={hole.id}
-      className="holeListItem"
-      onClick={() => setSelectedHole(hole)}
-    >
+  <button
+  key={hole.id}
+  className="holeListItem"
+  onClick={() => {
+    setSelectedHole(hole);
+    setPage("hole");
+  }}
+>
       <div className="holeNumber">{hole.id}</div>
 
       <div className="holeInfo">
@@ -719,7 +727,7 @@ onClick={() => {
       <strong>Birdiebook</strong>
       <p>18-Loch Birdiebook</p>
     </div>
-    <span className="menuArrow">›</span>
+    <span className="menuIcon"></span>
   </button>
 
   <button
@@ -733,7 +741,7 @@ onClick={() => {
     <p>Digitale Scorekarte</p>
   </div>
 
-  <span className="menuArrow">›</span>
+  <span className="menuIcon">›</span>
 </button>
 
 <button
@@ -746,7 +754,7 @@ onClick={() => {
       <strong>Platzregeln</strong>
       <p>Regeln & Hinweise</p>
     </div>
-    <span className="menuArrow">›</span>
+    <span className="menuIcon">›</span>
   </button>
 <button
   className="homeMenuButton"
@@ -757,7 +765,7 @@ onClick={() => {
       <strong>Clubkontakt</strong>
       <p>Sekretariat & Kontakt</p>
     </div>
-    <span className="menuArrow">›</span>
+    <span className="menuIcon">›</span>
   </button>
 </section>
 
