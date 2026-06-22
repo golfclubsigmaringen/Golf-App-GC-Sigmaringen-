@@ -34,7 +34,7 @@ const holes = [
 
 function App() {
   const [page, setPage] = useState("home");
-  const [selectedHole, setSelectedHole] = useState(null);
+  const [selectedHole, setSelectedHole] = useState(holes[0]);
 const [scores, setScores] = useState({});
 const [showLogin, setShowLogin] = useState(false);
 const [adminPassword, setAdminPassword] = useState("");
