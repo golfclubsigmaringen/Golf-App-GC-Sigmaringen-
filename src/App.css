@@ -27,37 +27,32 @@ body {
   content: "";
   position: fixed;
   inset: 0;
-  background: url("/Golf-App-GC-Sigmaringen-/golfclub.jpg") center/cover no-repeat;
-  z-index: 0;
+  background: url("/golfclub.jpg") 35% center/cover no-repeat;
+  z-index: 1;
 }
 
 .app::before {
   content: "";
   position: fixed;
-  left: -160px;
-  top: -80px;
-  width: 620px;
-  height: 120vh;
+  left: -260px;
+  top: -120px;
+  width: 420px;
+  height: 130vh;
   background: #004a8f;
-  border-radius: 0 62% 55% 0;
-  z-index: 1;
+  border-radius: 0 55% 45% 0 / 0 40% 60% 0;
+  z-index: 2;
 }
-
-.hero {
-  height: 0;
-}
-
-.heroImage,
-.heroWave {
-  display: none;
-}
-
 
 .content,
 .bottomNav {
   position: relative;
-  z-index: 2;
+  z-index: 3;
 }
+
+
+
+
+
 .hero {
   position: relative;
   height: 420px;
@@ -83,7 +78,7 @@ body {
 
 .content {
   max-width: 520px;
-  margin: 50px  left 20px;
+  margin: 40px  left 10px;
   padding: 0 18px 90px;
   position: relative;
   z-index: 20;

@@ -327,10 +327,10 @@ if (page === "kontakt") {
           ← Zurück
         </button>
       <img
-  src="/logo-gc-sig-positiv400px.png"
+  src={`${import.meta.env.BASE_URL}logo-gc-sig-positiv400px.png`}
   alt="Golf-Club Sigmaringen"
   className="clubLogo"
-/>
+/>s
 
         <section className="infoCard">
   <h1>Clubkontakt</h1>
