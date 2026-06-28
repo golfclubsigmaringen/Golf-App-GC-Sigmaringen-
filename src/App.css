@@ -1,46 +1,93 @@
+/* =========================================================
+   Golf Club App - App.css
+   Aufgeraeumt + Startseite nach Referenzbild
+   ========================================================= */
+
 :root {
   --blue: #004a8f;
+  --blue-dark: #003a78;
   --orange: #f5a81c;
   --gray: #e6e7e8;
+  --light: #f4f6f8;
   --dark: #1f1f26;
+  --muted: #666;
+  --white: #fff;
+
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 10px 26px rgba(0, 0, 0, 0.10);
+  --shadow-lg: 0 12px 35px rgba(0, 0, 0, 0.12);
+
+  --content-width: 500px;
+  --bottom-nav-height: 72px;
 }
+
+/* =========================
+   Reset / Base
+   ========================= */
 
 * {
   box-sizing: border-box;
 }
 
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
 body {
   margin: 0;
   font-family: Frutiger, Arial, sans-serif;
-  background: #004a8f;
+  background: var(--blue);
   color: var(--dark);
 }
 
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* =========================
+   App Hintergrund / Startseite
+   ========================= */
+
 .app {
-  min-height: 100vh;
   position: relative;
-  overflow: hidden;
-  background: #004a8f;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: var(--blue);
 }
 
 .app::after {
   content: "";
   position: fixed;
   inset: 0;
-  background: url("/golfclub.jpg") 35% center/cover no-repeat;
   z-index: 1;
+  pointer-events: none;
+  background: url("/golfclub.jpg") 62% center / cover no-repeat;
 }
 
 .app::before {
   content: "";
   position: fixed;
-  left: -260px;
-  top: -120px;
-  width: 420px;
-  height: 130vh;
-  background: #004a8f;
-  border-radius: 0 55% 45% 0 / 0 40% 60% 0;
+  top: -90px;
+  left: -165px;
+  width: 430px;
+  height: 125vh;
   z-index: 2;
+  pointer-events: none;
+  background: var(--blue);
+  border-radius: 0 48% 56% 0 / 0 18% 54% 0;
+  transform: skewX(-6deg);
 }
 
 .content,
@@ -49,85 +96,201 @@ body {
   z-index: 3;
 }
 
+.content {
+  width: calc(100vw - 72px);
+  max-width: var(--content-width);
+  margin: 115px 0 40px 32px;
+  padding: 0 0 calc(var(--bottom-nav-height) + 24px);
+  background: transparent;
+}
 
-
-
-
+/* Optional altes Hero-Markup */
 .hero {
   position: relative;
-  height: 420px;
+  height: 450px;
   overflow: hidden;
 }
 
 .heroImage {
+  position: relative;
+  z-index: 1;
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: 70% center;
-  display: block;
-  position: relative;
-  z-index: 1;
 }
-
 
 .clubbrand {
   left: 40px;
   top: 120px;
-  }
+}
 
+.clubLogo,
+.clubLogoImage {
+  display: block;
+  height: auto;
+}
 
-.content {
-  max-width: 520px;
-  margin: 40px  left 10px;
-  padding: 0 18px 90px;
-  position: relative;
-  z-index: 20;
-  }
+.clubLogo {
+  width: 280px;
+  max-width: 90%;
+  margin: 0 auto 20px;
+}
+
+.clubLogoImage {
+  width: 260px;
+  max-width: 75%;
+  margin-bottom: 22px;
+}
+
+/* =========================
+   Cards / Status
+   ========================= */
 
 .statusCard,
-.infoCard {
-  background: white;
-  border-radius: 22px;
-  padding: 18px;
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+.infoCard,
+.scoreSettings {
+  width: 100%;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
 }
 
 .statusCard {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  gap: 18px;
   margin-bottom: 18px;
+  padding: 18px 22px;
+}
+
+.statusLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .statusCard p,
 .infoCard p {
   margin: 4px 0 0;
-  color: #666;
+  color: var(--muted);
 }
 
+.statusRight,
+.pinDisplay {
+  margin-left: auto;
+  color: var(--blue);
+  font-weight: 800;
+  white-space: nowrap;
+}
 
+.infoCard {
+  padding: 18px;
+}
 
+.infoCard h3 {
+  margin-top: 0;
+  color: var(--orange);
+}
+
+.infoCard strong {
+  color: var(--blue);
+}
+
+/* =========================
+   Startseiten-Menue wie Vorlage
+   ========================= */
+
+.homeMenu {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.homeMenuButton {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 58px 1fr 24px;
+  align-items: center;
+  gap: 12px;
+  min-height: 96px;
+  padding: 16px;
+  text-align: left;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: var(--white);
+  box-shadow: var(--shadow-md);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.homeMenuButton:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+.homeMenuButton strong {
+  display: block;
+  color: var(--blue);
+  font-size: 18px;
+  line-height: 1.15;
+}
+
+.homeMenuButton p {
+  margin: 4px 0 0;
+  color: #777;
+  font-size: 13px;
+}
+
+.menuIcon {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-sm);
+  background: var(--light);
+  color: var(--blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.menuArrow {
+  color: var(--blue);
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+/* Alte Grid-Menuekarten bleiben kompatibel */
 .menuGrid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 14px;
   margin-bottom: 18px;
 }
 
 .menuCard {
-  background: white;
-  border: none;
-  border-radius: 22px;
   padding: 22px 16px;
   text-align: left;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
+  border: 0;
+  border-radius: var(--radius-lg);
+  background: var(--white);
+  box-shadow: var(--shadow-md);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.menuCard:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
 }
 
 .menuCard span {
-  font-size: 30px;
   display: block;
   margin-bottom: 12px;
+  font-size: 30px;
 }
 
 .menuCard strong {
@@ -141,77 +304,76 @@ body {
   color: #777;
 }
 
-.menuCard:hover {
-  transform: translateY(-2px);
-}
+/* =========================
+   Buttons / Navigation
+   ========================= */
 
-.infoCard h3 {
-  margin-top: 0;
-  color: var(--orange);
-}
-
-@media (max-width: 600px) {
-  .hero {
-    height: 330px;
-  }
-
-  .heroOverlay h1 {
-    font-size: 40px;
-  }
-
-  .heroOverlay h2 {
-    font-size: 28px;
-  }
-}
-.menuCard {
-  transition: all 0.2s ease;
-}
-
-.menuCard:hover {
-  transform: translateY(-4px);
-}
-
-.hero {
-  height: 450px;
-}
-
-.content {
-  max-width: 500px;
-}
-
-.menuGrid {
-  grid-template-columns: repeat(4, 1fr);
-}
-
-@media (max-width: 900px) {
-  .menuGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
 .backButton,
-.mainButton {
-  background: var(--blue);
-  color: white;
-  border: none;
-  border-radius: 14px;
-  padding: 12px 18px;
+.mainButton,
+.navButton {
+  border: 0;
+  border-radius: var(--radius-sm);
   font-size: 16px;
-  margin-bottom: 18px;
 }
 
-.holeGrid {
+.backButton {
+  margin: 40px 0 15px;
+  padding: 10px 0;
+  background: transparent;
+  color: var(--blue);
+  font-weight: 700;
+}
+
+.mainButton {
+  width: 100%;
+  padding: 14px;
+  background: var(--orange);
+  color: var(--white);
+}
+
+.holeNav {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.navButton {
+  flex: 1;
+  padding: 12px;
+  background: var(--blue);
+  color: var(--white);
+  font-size: 14px;
+}
+
+.navButton:hover {
+  opacity: 0.9;
+}
+
+/* =========================
+   Birdiebook / Lochliste
+   ========================= */
+
+.holeGrid,
+.holeList {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
   gap: 12px;
 }
 
-.holeCard {
-  background: white;
-  border: none;
-  border-radius: 18px;
-  padding: 18px;
+.holeGrid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.holeCard,
+.holeListItem {
   text-align: left;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  border: 0;
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+}
+
+.holeCard {
+  padding: 18px;
+  border-radius: 18px;
 }
 
 .holeCard strong,
@@ -225,194 +387,8 @@ body {
   font-size: 20px;
 }
 
-.teeGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin: 20px 0;
-}
-
-.teeGrid div {
-  background: #f4f6f8;
-  border-radius: 14px;
-  padding: 12px;
-  text-align: center;
-}
-
-.teeGrid span {
-  display: block;
-  color: var(--blue);
-}
-
-.placeholderImage {
-  height: 300px;
-  border-radius: 22px;
-  background: #e6e7e8;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 20px 0;
-  color: #555;
-}
-.holeImage {
-  width: 100%;
-  max-width: 900px;
-  border-radius: 20px;
-  margin: 24px auto;
-  display: block;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-}
-
-.backButton {
-  background: #004a8f;
-  color: white;
-  border: none;
-  padding: 10px 16px;
-  border-radius: 12px;
-  cursor: pointer;
-  margin-bottom: 16px;
-}
-
-.mainButton {
-  width: 100%;
-  background: #f5a81c;
-  color: white;
-  border: none;
-  padding: 14px;
-  border-radius: 12px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.teeGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin: 20px 0;
-}
-
-.teeGrid div {
-  background: #f4f6f8;
-  padding: 12px;
-  border-radius: 12px;
-  text-align: center;
-}
-
-.teeGrid strong {
-  display: block;
-}
-.holeNav {
-  display: flex;
-  gap: 10px;
-  margin: 20px 0;
-}
-
-.navButton {
-  flex: 1;
-  background: #004a8f;
-  color: white;
-  border: none;
-  border-radius: 12px;
-  padding: 12px;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.navButton:hover {
-  opacity: 0.9;
-}
-.homeMenu {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-bottom: 18px;
-}
-
-.homeMenuButton {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 52px 1fr 24px;
-  align-items: center;
-  gap: 12px;
-  background: white;
-  border: none;
-  border-radius: 16px;
-  padding: 16px;
-  text-align: left;
-  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-}
-
-.homeMenuButton strong {
-  color: var(--blue);
-  font-size: 18px;
-}
-
-.homeMenuButton p {
-  margin: 4px 0 0;
-  color: #777;
-  font-size: 13px;
-}
-
-.menuIcon {
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  background: #f4f6f8;
-  color: var(--blue);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-  font-weight: 700;
-}
-
-.menuArrow {
-  color: #004A8F;
-  font-size: 24px;
-  font-weight: bold;
-}
-.homeMenu {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-bottom: 18px;
-}
-
-.homeMenuButton {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 52px 1fr 24px;
-  align-items: center;
-  gap: 12px;
-  background: white;
-  border: none;
-  border-radius: 16px;
-  padding: 16px;
-  text-align: left;
-  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-}
-
-.menuIcon {
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  background: #f4f6f8;
-  color: var(--blue);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.menuArrow {
-  color: var(--blue);
-  font-size: 28px;
-}
 .holeList {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  grid-template-columns: 1fr;
 }
 
 .holeListItem {
@@ -421,13 +397,8 @@ body {
   grid-template-columns: 48px 1fr 54px 20px;
   align-items: center;
   gap: 12px;
-  background: white;
-  border: none;
-  border-radius: 16px;
   padding: 14px;
-  text-align: left;
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
-  cursor: pointer;
+  border-radius: var(--radius-md);
 }
 
 .holeNumber {
@@ -437,15 +408,19 @@ body {
   line-height: 1;
 }
 
-.holeInfo strong {
+.holeInfo strong,
+.holeInfo span,
+.holeInfo small {
   display: block;
+}
+
+.holeInfo strong {
   color: var(--blue);
   font-size: 17px;
 }
 
 .holeInfo span,
 .holeInfo small {
-  display: block;
   color: #555;
   font-size: 13px;
 }
@@ -455,233 +430,158 @@ body {
   height: 70px;
   object-fit: contain;
 }
-.gpsGrid {
+
+.placeholderImage {
+  height: 300px;
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-lg);
+  background: var(--gray);
+  color: #555;
+}
+
+.holeImage {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 900px;
+  margin: 24px auto;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.pinFlag {
+  position: absolute;
+  z-index: 5;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  font-size: 28px;
+}
+
+/* =========================
+   Tee / GPS / Pin Positionen
+   ========================= */
+
+.teeGrid,
+.gpsGrid,
+.pinButtons {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
   gap: 12px;
+}
+
+.teeGrid,
+.gpsGrid {
+  grid-template-columns: repeat(3, 1fr);
+  margin: 20px 0;
+}
+
+.gpsGrid {
   margin: 16px 0 24px;
 }
 
+.teeGrid div,
 .gpsCard {
-  background: white;
-  border-radius: 14px;
-  padding: 12px;
+  border-radius: var(--radius-sm);
   text-align: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.teeGrid div {
+  padding: 12px;
+  background: var(--light);
+}
+
+.teeGrid strong,
+.teeGrid span,
+.gpsCard strong,
+.gpsCard span {
+  display: block;
+}
+
+.teeGrid span {
+  color: var(--blue);
+}
+
+.gpsCard {
+  padding: 12px;
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
 }
 
 .gpsCard strong {
-  display: block;
   margin-bottom: 6px;
   color: #555;
 }
 
 .gpsCard span {
+  color: var(--orange);
   font-size: 22px;
-  font-weight: bold;
-  color: #f5a81c;
+  font-weight: 800;
 }
+
+.teeYellow,
+.teeBlue,
+.teeRed {
+  font-weight: 700;
+}
+
 .teeYellow {
-  background: #f9d64a;
-  color: white;
+  background: #f9d64a !important;
+  color: #111 !important;
 }
 
 .teeBlue {
-  background: #2d6cdf;
-  color: white;
+  background: var(--blue) !important;
+  color: var(--white) !important;
 }
 
 .teeRed {
-  background: #d93025;
-  color: white;
-}
-.scoreSummary {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  margin: 20px 0;
+  background: #c62828 !important;
+  color: var(--white) !important;
 }
 
-.scoreSummary div {
-  background: white;
-  border-radius: 16px;
-  padding: 16px;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+.teeYellow strong,
+.teeYellow span,
+.teeBlue strong,
+.teeBlue span,
+.teeRed strong,
+.teeRed span {
+  color: inherit !important;
 }
 
-.scoreSummary strong {
-  display: block;
-  color: #004a8f;
-  margin-bottom: 6px;
-}
-
-.scoreList {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.scoreRow {
-  background: white;
-  border-radius: 16px;
-  padding: 14px;
-  display: grid;
-  grid-template-columns: 1fr 36px 38px 36px 36px;
-  align-items: center;
-  gap: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-}
-
-.scoreRow button {
-  border: none;
-  background: #004a8f;
-  color: white;
-  border-radius: 10px;
-  height: 36px;
-  cursor: pointer;
-  font-size: 18px;
-}
-
-.scoreNumber {
-  text-align: center;
-  font-size: 20px;
-}
-
-.scoreDiff {
-  text-align: center;
-  font-weight: 700;
-  color: #d18c00;
-}
-.scoreRow div:first-child {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.scoreRow div:first-child span {
-  color: #666;
-  font-size: 14px;
-}
-.scoreDiff {
-  pointer-events: none;
-}
 .pinButtons {
-  display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 8px;
   margin-top: 12px;
 }
 
 .pinButton {
-  border: none;
-  border-radius: 12px;
   padding: 12px 0;
-  background: #e6e7e8;
-  color: #004a8f;
-  font-weight: 700;
-  cursor: pointer;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: var(--gray);
+  color: var(--blue);
+  font-weight: 800;
 }
 
 .pinButton.active {
-  background: #f5a81c;
-  color: white;
-}
-.holeImage {
-  position: relative;
+  background: var(--orange);
+  color: var(--white);
 }
 
-.pinFlag {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  font-size: 28px;
-  z-index: 5;
-  pointer-events: none;
-}
-.teeYellow {
-  background: #f9d64a !important;
-  color: #111;
-}
+/* =========================
+   Scorekarte
+   ========================= */
 
-.teeBlue {
-  background: #004a8f !important;
-  color: white;
-}
-
-.teeRed {
-  background: #c62828 !important;
-  color: white;
-}
-
-.teeYellow span,
-.teeBlue span,
-.teeRed span {
-  color: inherit;
-}
-.teeBlue strong,
-.teeBlue span,
-.teeRed strong,
-.teeRed span {
-  color: white !important;
-}
-
-.teeYellow strong,
-.teeYellow span {
-  color: #111 !important;
-}
-.statusCard {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.pinDisplay {
-  font-weight: 700;
-  color: #004a8f;
-}
-.statusLeft {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.statusRight {
-  margin-left: auto;
-  font-weight: 700;
-  color: #1d3f8f;
-  white-space: nowrap;
-}
-.backButton {
-  background: none;
-  border: none;
-  color: #1d3f8f;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  margin-bottom: 15px;
-  margin-top: 40px;
-  
-}
-.clubLogo {
-  width: 280px;
-  max-width: 90%;
-  display: block;
-  margin: 0 auto 20px auto;
-}
-.infoCard strong {
-  color: #0b4a93;
-}
 .scoreSettings {
-  background: white;
-  border-radius: 22px;
-  padding: 20px;
   margin: 20px 0;
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+  padding: 20px;
 }
 
 .scoreSettings h3 {
-  margin-bottom: 16px;
-  color: #004a8f;
+  margin: 0 0 16px;
+  color: var(--blue);
 }
 
 .scoreSettingRow {
@@ -694,60 +594,137 @@ body {
 }
 
 .scoreSettingRow label {
-  font-weight: 700;
+  font-weight: 800;
 }
 
 .scoreSettingRow select,
 .scoreSettingRow input {
   width: 140px;
   padding: 8px 10px;
-  border-radius: 10px;
   border: 1px solid #ddd;
+  border-radius: 10px;
   font-size: 16px;
 }
 
 .playingHandicapBox {
   margin-top: 16px;
   padding: 14px;
-  border-radius: 16px;
+  border-radius: var(--radius-md);
   background: #e6f0fb;
-  color: #004a8f;
+  color: var(--blue);
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 800;
   text-align: center;
 }
+
+.scoreSummary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.scoreSummary div {
+  padding: 16px;
+  text-align: center;
+  border-radius: var(--radius-md);
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+}
+
+.scoreSummary strong {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--blue);
+}
+
+.scoreList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.scoreRow {
+  display: grid;
+  grid-template-columns: 1fr 36px 38px 36px 36px;
+  align-items: center;
+  gap: 10px;
+  padding: 14px;
+  border-radius: var(--radius-md);
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+}
+
+.scoreRow div:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.scoreRow div:first-child span {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.scoreRow button {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--blue);
+  color: var(--white);
+  font-size: 18px;
+}
+
+.scoreNumber {
+  text-align: center;
+  font-size: 20px;
+}
+
+.scoreDiff {
+  pointer-events: none;
+  text-align: center;
+  color: #d18c00;
+  font-weight: 800;
+}
+
 .strokeInfo {
   display: block;
   margin-top: 6px;
-  font-size: 0.85rem;
   color: #6b7280;
+  font-size: 0.85rem;
   font-weight: 500;
 }
+
+/* =========================
+   Bottom Navigation
+   ========================= */
+
 .bottomNav {
   position: fixed;
+  right: 0;
   bottom: 0;
   left: 0;
-  right: 0;
-  height: 72px;
-  background: white;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  border-top: 1px solid #e6e7e8;
-  box-shadow: 0 -4px 16px rgba(0,0,0,.08);
   z-index: 9999;
+  height: var(--bottom-nav-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: var(--white);
+  border-top: 1px solid var(--gray);
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08);
 }
 
 .bottomNav button {
-  border: 0;
-  background: none;
-  color: #004a8f;
-  font-weight: 700;
+  min-width: 70px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 4px;
-  min-width: 70px;
+  border: 0;
+  background: transparent;
+  color: var(--blue);
+  font-weight: 800;
 }
 
 .bottomNav span {
@@ -758,9 +735,98 @@ body {
 .bottomNav small {
   font-size: 12px;
 }
-.clubLogoImage {
-  width: 260px;
-  max-width: 75%;
-  height: auto;
-  display: block;
+
+/* =========================
+   Responsive
+   ========================= */
+
+@media (max-width: 900px) {
+  .menuGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .app::after {
+    background-position: 64% center;
+  }
+
+  .app::before {
+    left: -190px;
+    width: 390px;
+  }
+
+  .content {
+    width: calc(100vw - 64px);
+    max-width: 410px;
+    margin: 105px 0 40px 28px;
+  }
+
+  .hero {
+    height: 330px;
+  }
+
+  .heroOverlay h1 {
+    font-size: 40px;
+  }
+
+  .heroOverlay h2 {
+    font-size: 28px;
+  }
+
+  .statusCard {
+    padding: 16px 18px;
+  }
+
+  .homeMenuButton {
+    grid-template-columns: 52px 1fr 22px;
+    min-height: 88px;
+    padding: 14px;
+    border-radius: 15px;
+  }
+
+  .menuIcon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .scoreSummary,
+  .pinButtons {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .scoreSettingRow {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .scoreSettingRow select,
+  .scoreSettingRow input {
+    width: 100%;
+  }
+}
+
+@media (max-width: 390px) {
+  .content {
+    width: calc(100vw - 48px);
+    margin-left: 24px;
+  }
+
+  .statusCard {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .statusRight {
+    margin-left: 0;
+  }
+
+  .menuGrid,
+  .holeGrid,
+  .teeGrid,
+  .gpsGrid,
+  .scoreSummary,
+  .pinButtons {
+    grid-template-columns: 1fr;
+  }
 }
